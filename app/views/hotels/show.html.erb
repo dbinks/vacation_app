@@ -1,0 +1,34 @@
+<div class="page-header">
+  <h3>Hotel #<%= @hotel.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @hotel.name %></dd>
+
+      <dt>Rating</dt>
+      <dd><%= @hotel.rating %></dd>
+
+      <dt>Hotel image</dt>
+      <dd><%= @hotel.hotel_image %></dd>
+
+      <dt>Location</dt>
+      <dd><%= @hotel.location_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/hotels" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/hotels/<%= @hotel.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_hotel/<%= @hotel.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<!-- Validation failure messages -->
+<% if @restaurant.errors.any? %>
+  <% @restaurant.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Restaurant</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_restaurant" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @restaurant.name %>">
+      </div>
+
+      <!-- Label and input for rating -->
+      <div class="form-group">
+        <label for="rating" class="control-label">
+          Rating
+        </label>
+
+        <input type="text" id="rating" name="rating" placeholder="Rating" class="form-control" value="<%= @restaurant.rating %>">
+      </div>
+
+      <!-- Label and input for restaurant_image -->
+      <div class="form-group">
+        <label for="restaurant_image" class="control-label">
+          Restaurant image
+        </label>
+
+        <input type="text" id="restaurant_image" name="restaurant_image" placeholder="Restaurant image" class="form-control" value="<%= @restaurant.restaurant_image %>">
+      </div>
+
+      <!-- Label and input for location_id -->
+      <div class="form-group">
+        <label for="location_id" class="control-label">
+          Location
+        </label>
+
+        <input type="text" id="location_id" name="location_id" placeholder="Location" class="form-control" value="<%= @restaurant.location_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Restaurant
+      </button>
+      or
+      <a href="/restaurants">Cancel</a>
+    </form>
+  </div>
+</div>

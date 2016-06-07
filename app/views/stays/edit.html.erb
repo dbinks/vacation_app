@@ -1,0 +1,64 @@
+<!-- Validation failure messages -->
+<% if @stay.errors.any? %>
+  <% @stay.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Stay #<%= @stay.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_stay/<%= @stay.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for hotel_id -->
+      <div class="form-group">
+        <label for="hotel_id" class="control-label">
+          Hotel
+        </label>
+
+        <input type="text" id="hotel_id" name="hotel_id" placeholder="Hotel" class="form-control" value="<%= @stay.hotel_id %>">
+      </div>
+
+      <!-- Label and input for leg_id -->
+      <div class="form-group">
+        <label for="leg_id" class="control-label">
+          Leg
+        </label>
+
+        <input type="text" id="leg_id" name="leg_id" placeholder="Leg" class="form-control" value="<%= @stay.leg_id %>">
+      </div>
+
+      <!-- Label and input for rating -->
+      <div class="form-group">
+        <label for="rating" class="control-label">
+          Rating
+        </label>
+
+        <input type="text" id="rating" name="rating" placeholder="Rating" class="form-control" value="<%= @stay.rating %>">
+      </div>
+
+      <!-- Label and input for description -->
+      <div class="form-group">
+        <label for="description" class="control-label">
+          Description
+        </label>
+
+        <input type="text" id="description" name="description" placeholder="Description" class="form-control" value="<%= @stay.description %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Stay
+      </button>
+      or
+      <a href="/stays/<%= @stay.id %>">Cancel</a>
+    </form>
+  </div>
+</div>
