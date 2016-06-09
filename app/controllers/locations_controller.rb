@@ -9,11 +9,7 @@ class LocationsController < ApplicationController
 
     @location = Location.find(params[:id])
     @street_address = @location.place
-    url_safe_street_address = URI.encode(@street_address)
-    url = "https://maps.googleapis.com/maps/api/geocode/json?address="+url_safe_street_address
-    parsed_data = JSON.parse(open(url).read)
-
-
+    @url= URI.encode(@street_address)
   end
 
   def new
@@ -26,7 +22,7 @@ class LocationsController < ApplicationController
     @location.place_image = params[:place_image]
 
     if @location.save
-      redirect_to "/locations", :notice => "Location created successfully."
+      redirect_to "/trips", :notice => "Location created successfully."
     else
       render 'new'
     end

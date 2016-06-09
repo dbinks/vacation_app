@@ -18,8 +18,8 @@
 
       <% @stays.each do |stay| %>
       <tr>
-        <td><%= stay.hotel_id %></td>
-        <td><%= stay.leg_id %></td>
+        <td><%= Hotel.find_by(:id => stay.hotel_id).name %></td>
+        <td><%= Leg.find_by(:id => stay.leg_id).id %></td>
         <td><%= stay.rating %></td>
         <td><%= stay.description %></td>
         <td>

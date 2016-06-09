@@ -5,10 +5,13 @@ class LegsController < ApplicationController
 
   def show
     @leg = Leg.find(params[:id])
+    @meal = Meal.new
+    @stay = Stay.new
   end
 
   def new
     @leg = Leg.new
+
   end
 
   def create
@@ -17,7 +20,7 @@ class LegsController < ApplicationController
     @leg.trip_id = params[:trip_id]
 
     if @leg.save
-      redirect_to "/legs", :notice => "Leg created successfully."
+      redirect_to :back, :notice => "Leg created successfully."
     else
       render 'new'
     end
@@ -34,7 +37,7 @@ class LegsController < ApplicationController
     @leg.trip_id = params[:trip_id]
 
     if @leg.save
-      redirect_to "/legs", :notice => "Leg updated successfully."
+      redirect_to "/trips", :notice => "Leg updated successfully."
     else
       render 'edit'
     end
@@ -45,6 +48,6 @@ class LegsController < ApplicationController
 
     @leg.destroy
 
-    redirect_to "/legs", :notice => "Leg deleted."
+    redirect_to "/trips", :notice => "Leg deleted."
   end
 end

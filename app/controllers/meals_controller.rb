@@ -5,6 +5,8 @@ class MealsController < ApplicationController
 
   def show
     @meal = Meal.find(params[:id])
+    @location_id = Leg.find_by(:id => @meal.leg_id).location_id
+
   end
 
   def new
@@ -19,7 +21,7 @@ class MealsController < ApplicationController
     @meal.description = params[:description]
 
     if @meal.save
-      redirect_to "/meals", :notice => "Meal created successfully."
+      redirect_to :back, :notice => "Meal created successfully."
     else
       render 'new'
     end

@@ -1,15 +1,50 @@
 <div class="page-header">
-  <h3>Leg #<%= @leg.id %></h3>
+  <h3><%= Location.find_by(:id => @leg.location_id).place %> </h3>
 </div>
 
 <div class="row">
   <div class="col-md-12">
     <dl class="dl-horizontal">
+      <dt>Leg Location</dt>
+
+      <img class="img-responsive center-block" m-top: 2cm; src="https://maps.googleapis.com/maps/api/staticmap?center=<%=Location.find_by(:id => @leg.location_id).place %> %>&zoom=6&size=900x400&maptype=roadmap&markers=color:red%7Clabel:!%7C<%=Location.find_by(:id => @leg.location_id).place %>"
+
+    </div>
+  </dt>
+</dl>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
       <dt>Location</dt>
-      <dd><%= @leg.location_id %></dd>
+      <dd> <a href="/locations/<%= @leg.location_id %>"> <%= Location.find_by(:id => @leg.location_id).place %></a></dd>
 
       <dt>Trip</dt>
-      <dd><%= @leg.trip_id %></dd>
+      <dd> <a href="/trips/<%= @leg.trip_id %>"> <%= Trip.find_by(:id => @leg.trip_id).name %></a></dd>
+
+      <dt>Meals on Leg</dt>
+      <dd><%= Meal.where(:leg_id =>@leg.id).count %>
+      </dd>
+
+      <dt>Restaurants Dined At
+        <% Meal.where(:leg_id =>@leg.id).each do |meal|%>
+        <dd>  <a href="/meals/<%=meal.id%>"><%= Restaurant.find_by(:id=>meal.restaurant_id).name%></a>
+        </dd>
+        <% end %>
+      </dt>
+
+      <dt>Stays on Leg</dt>
+
+
+      <dd><%= Stay.where(:leg_id =>@leg.id).count %>
+      </dd>
+
+      <dt>Hotels Stayed At
+        <% Stay.where(:leg_id =>@leg.id).each do |stay|%>
+        <dd>  <a href="/stays/<%=stay.id%>"><%= Hotel.find_by(:id=>stay.hotel_id).name%></a>
+        </dd>
+        <% end %>
+      </dt>
 
     </dl>
 
@@ -23,6 +58,110 @@
       <a href="/delete_leg/<%= @leg.id %>" class="btn btn-danger" rel="nofollow">
         Delete
       </a>
+    </div>
+  </div>
+</div>
+
+<div class="dl-horizontal">
+  <div class="col-md-12">
+    <div class="row">
+
+      <h4>Create New Meal</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <form action="/create_meal" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+            <!-- Label and input for restaurant_id -->
+            <div class="form-group">
+              <label for="restaurant_id" class="control-label">
+                Restaurant
+              </label>
+
+              <%= select_tag(:restaurant_id, options_from_collection_for_select(Restaurant.where(:location_id =>@leg.location_id), :id, :name, @meal.restaurant_id), :class => "form-control") %>
+            </div>
+            <div class="form-group">
+              <a href="/restaurants/new">Add New Restaurant</a>
+
+            </div>
+            <!-- Label and input for leg_id -->
+
+            <input type="hidden" name="leg_id" value="<%= @leg.id %>"
+          </div>
+
+          <!-- Label and input for rating -->
+          <div class="form-group">
+            <label for="rating" class="control-label">
+              Rating
+            </label>
+
+            <input type="text" id="rating" name="rating" placeholder="Rating" class="form-control" value="<%= @meal.rating %>">
+          </div>
+
+          <!-- Label and input for description -->
+          <div class="form-group">
+            <label for="description" class="control-label">
+              Description
+            </label>
+
+            <input type="text" id="description" name="description" placeholder="Description" class="form-control" value="<%= @meal.description %>">
+          </div>
+
+          <button class="btn btn-success">
+            Create Meal
+          </button>
+        </form>
+      </div>
+    </div>
+
+<hr>
+    <div class="row">
+      <h4>Create New Stay</h4>
+      <div class="col-md-12">
+        <form action="/create_stay" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for hotel_id -->
+          <div class="form-group">
+            <label for="hotel_id" class="control-label">
+              Hotel
+            </label>
+
+            <%= select_tag(:hotel_id, options_from_collection_for_select(Hotel.where(:location_id => @leg.location_id), :id, :name, @stay.hotel_id), :class => "form-control") %>
+          </div>
+          <div class="form-group">
+            <a href="/hotels/new">Add New Hotel</a>
+
+          </div>
+
+          <!-- Label and input for leg_id -->
+          <input type="hidden" name="leg_id" value="<%= @leg.id %>">
+
+          <!-- Label and input for rating -->
+          <div class="form-group">
+            <label for="rating" class="control-label">
+              Rating
+            </label>
+
+            <input type="text" id="rating" name="rating" placeholder="Rating" class="form-control" value="<%= @stay.rating %>">
+          </div>
+
+          <!-- Label and input for description -->
+          <div class="form-group">
+            <label for="description" class="control-label">
+              Description
+            </label>
+
+            <input type="text" id="description" name="description" placeholder="Description" class="form-control" value="<%= @stay.description %>">
+          </div>
+
+          <button class="btn btn-success">
+            Create Stay
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

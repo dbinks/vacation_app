@@ -24,7 +24,7 @@
           Hotel
         </label>
 
-        <input type="text" id="hotel_id" name="hotel_id" placeholder="Hotel" class="form-control" value="<%= @stay.hotel_id %>">
+        <%= select_tag(:hotel_id, options_from_collection_for_select(Hotel.all, :id, :name, @stay.hotel_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for leg_id -->
@@ -33,7 +33,7 @@
           Leg
         </label>
 
-        <input type="text" id="leg_id" name="leg_id" placeholder="Leg" class="form-control" value="<%= @stay.leg_id %>">
+          <%= select_tag(:leg_id, options_from_collection_for_select(Leg.all, :id, :location_id, @stay.leg_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for rating -->

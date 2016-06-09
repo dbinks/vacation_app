@@ -20,8 +20,8 @@
       <tr>
         <td><%= hotel.name %></td>
         <td><%= hotel.rating %></td>
-        <td><%= hotel.hotel_image %></td>
-        <td><%= hotel.location_id %></td>
+        <td><img src="<%= hotel.hotel_image %>"></td>
+        <td><a href="/locations/<%= hotel.location_id %>"><%= Location.find_by(:id => hotel.location_id).place %></td>
         <td>
           <a href="/hotels/<%= hotel.id %>" class="btn btn-primary">Show</a>
           <a href="/hotels/<%= hotel.id %>/edit" class="btn btn-warning">Edit</a>

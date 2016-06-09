@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h3>Trip #<%= @trip.id %></h3>
+  <h3><%= @trip.name %></h3>
 </div>
 
 <div class="row">
@@ -14,7 +14,57 @@
       <dt>End date</dt>
       <dd><%= @trip.end_date %></dd>
 
+      <dt>Number of Legs on Trip</dt>
+      <dd><%= Leg.where(:trip_id => @trip.id).count
+       %></dd>
+
+       <dt>Leg Location</dt>
+         <% Leg.where(:trip_id =>@trip.id).each do |leg| %>
+         <dd> <a href="/legs/<%=leg.id%>"><%= Location.find_by(:id=>leg.location_id).place%></a></dd>
+         <% end %>
+
+
     </dl>
+
+    <div class="row">
+      <h4>New Trip Leg</h4>
+      <div class="col-md-12">
+        <form action="/create_leg" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for location_id -->
+          <div class="form-group">
+            <label for="location_id" class="control-label">
+              Location
+            </label>
+
+            <%= select_tag(:location_id, options_from_collection_for_select(Location.all, :id, :place, @leg.location_id), :class => "form-control") %>
+
+          </div>
+
+          <!-- Label and input for trip_id -->
+          <div class="form-group">
+
+
+              <input type="hidden" name="trip_id" value="<%= @trip.id %>"
+          </div>
+
+          <button class="btn btn-success">
+            Create New Leg
+          </button>
+          or
+          <a href="/legs">Cancel</a>
+        </form>
+      </div>
+      <div class ="form-group">
+      <a href="/locations/new">Add New Location </a>
+      </div>
+    </div>
+
+<div class="row">
+<h4>Trip Modification Options</h4>
+</div>
 
     <div class="btn-group btn-group-justified">
       <a href="/trips" class="btn btn-primary">

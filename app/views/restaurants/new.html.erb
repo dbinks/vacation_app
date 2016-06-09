@@ -51,14 +51,15 @@
           Location
         </label>
 
-        <input type="text" id="location_id" name="location_id" placeholder="Location" class="form-control" value="<%= @restaurant.location_id %>">
+          <%= select_tag(:location_id, options_from_collection_for_select(Location.all, :id, :place, @restaurant.location_id), :class => "form-control") %>
+
       </div>
 
       <button class="btn btn-success">
         Create Restaurant
       </button>
       or
-      <a href="/restaurants">Cancel</a>
+      <a href="/trips">Cancel</a>
     </form>
   </div>
 </div>

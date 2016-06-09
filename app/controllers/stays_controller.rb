@@ -5,6 +5,7 @@ class StaysController < ApplicationController
 
   def show
     @stay = Stay.find(params[:id])
+    @location_id = Leg.find_by(:id => @stay.leg_id).location_id
   end
 
   def new
@@ -19,7 +20,7 @@ class StaysController < ApplicationController
     @stay.description = params[:description]
 
     if @stay.save
-      redirect_to "/stays", :notice => "Stay created successfully."
+      redirect_to :back, :notice => "Stay created successfully."
     else
       render 'new'
     end
@@ -49,6 +50,6 @@ class StaysController < ApplicationController
 
     @stay.destroy
 
-    redirect_to "/stays", :notice => "Stay deleted."
+    redirect_to "/trips", :notice => "Stay deleted."
   end
 end

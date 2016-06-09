@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-
+gem 'yelp', require: 'yelp'
 #devise
 gem 'devise'
 #starter gemfile

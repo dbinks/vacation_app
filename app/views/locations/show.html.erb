@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h3>Location #<%= @location.id %></h3>
+  <h3><%= @location.place %></h3>
 </div>
 
 <div class="row">
@@ -10,23 +10,31 @@
 
       <dt>Place image</dt>
       <dd><img src="<%= @location.place_image %>"></dd>
-
-      <dt>URL Safe</dt>
-      <%= @url %>
-
-
     </dl>
-
-    <div class="btn-group btn-group-justified">
-      <a href="/locations" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/locations/<%= @location.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_location/<%= @location.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
-    </div>
   </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Map</dt>
+
+      <img class="img-responsive center-block" m-top: 2cm; src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @url %>&zoom=6&size=900x400&maptype=roadmap&markers=color:red%7Clabel:<%=@location.id%>%7C<%= @url %>">
+
+    </div>
+  </dt>
+</dl>
+
+<div class="btn-group btn-group-justified">
+  <a href="/locations" class="btn btn-primary">
+    Back
+  </a>
+  <a href="/locations/<%= @location.id %>/edit" class="btn btn-warning">
+    Edit
+  </a>
+  <a href="/delete_location/<%= @location.id %>" class="btn btn-danger" rel="nofollow">
+    Delete
+  </a>
+</div>
+</div>
 </div>

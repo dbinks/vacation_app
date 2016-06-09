@@ -19,7 +19,7 @@ class RestaurantsController < ApplicationController
     @restaurant.location_id = params[:location_id]
 
     if @restaurant.save
-      redirect_to "/restaurants", :notice => "Restaurant created successfully."
+      redirect_to "/trips", :notice => "Restaurant created successfully."
     else
       render 'new'
     end

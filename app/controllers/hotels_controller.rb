@@ -19,7 +19,7 @@ class HotelsController < ApplicationController
     @hotel.location_id = params[:location_id]
 
     if @hotel.save
-      redirect_to "/hotels", :notice => "Hotel created successfully."
+      redirect_to "/trips", :notice => "Hotel created successfully."
     else
       render 'new'
     end

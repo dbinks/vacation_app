@@ -16,8 +16,8 @@
 
       <% @legs.each do |leg| %>
       <tr>
-        <td><%= leg.location_id %></td>
-        <td><%= leg.trip_id %></td>
+        <td><%= Location.find_by(:id => leg.location_id).place %></td>
+        <td><%= Trip.find_by(:id => leg.trip_id).name %></td>
         <td>
           <a href="/legs/<%= leg.id %>" class="btn btn-primary">Show</a>
           <a href="/legs/<%= leg.id %>/edit" class="btn btn-warning">Edit</a>

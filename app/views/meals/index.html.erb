@@ -18,8 +18,8 @@
 
       <% @meals.each do |meal| %>
       <tr>
-        <td><%= meal.restaurant_id %></td>
-        <td><%= meal.leg_id %></td>
+        <td><%= Restaurant.find_by(:id => meal.restaurant_id).name %></td>
+        <td><%= Leg.find_by(:id =>meal.leg_id).id %></td>
         <td><%= meal.rating %></td>
         <td><%= meal.description %></td>
         <td>
