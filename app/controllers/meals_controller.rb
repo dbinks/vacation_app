@@ -1,6 +1,6 @@
 class MealsController < ApplicationController
   def index
-    @meals = Meal.all
+    @meals = current_user.meals
   end
 
   def show
@@ -15,6 +15,7 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new
+    @meal.user_id = params[:user_id]
     @meal.restaurant_id = params[:restaurant_id]
     @meal.leg_id = params[:leg_id]
     @meal.rating = params[:rating]
@@ -23,12 +24,13 @@ class MealsController < ApplicationController
     if @meal.save
       redirect_to :back, :notice => "Meal created successfully."
     else
-      render 'new'
+      redirect_to :back, :notice => "Entry error"
     end
   end
 
   def edit
     @meal = Meal.find(params[:id])
+    @location_id = Leg.find_by(:id => @meal.leg_id).location_id
   end
 
   def update

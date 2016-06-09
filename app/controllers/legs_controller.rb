@@ -22,7 +22,7 @@ class LegsController < ApplicationController
     if @leg.save
       redirect_to :back, :notice => "Leg created successfully."
     else
-      render 'new'
+      redirect_to :back, :notice => "Leg already on trip"
     end
   end
 

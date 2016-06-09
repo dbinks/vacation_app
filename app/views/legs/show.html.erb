@@ -73,6 +73,8 @@
             <!-- Hidden input for authenticity token to protect from forgery -->
             <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
+              <input type ="hidden" name="user_id" value="<%= current_user.id %>"
+
             <!-- Label and input for restaurant_id -->
             <div class="form-group">
               <label for="restaurant_id" class="control-label">
@@ -122,6 +124,8 @@
         <form action="/create_stay" method="post">
           <!-- Hidden input for authenticity token to protect from forgery -->
           <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <input type ="hidden" name="user_id" value="<%= current_user.id %>"
 
           <!-- Label and input for hotel_id -->
           <div class="form-group">

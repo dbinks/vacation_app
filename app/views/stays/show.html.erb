@@ -7,13 +7,13 @@
     <dl class="dl-horizontal">
       <dt>Hotel</dt>
       <a href="/hotels/<%= @stay.hotel_id %>">
-      <dd><%= Hotel.find_by(:id => @stay.hotel_id).name %></a></dd>
+      <dd><%= @stay.hotel.name %></a></dd>
 
       <dt>Location</dt>
       <dd> <a href="/legs/<%= @stay.leg_id %>"><%= Location.find_by(:id => @location_id).place %></dd>
         </a>
 
-      <dt>Rating</dt>
+      <dt>Rating (0-5)</dt>
       <dd><%= @stay.rating %></dd>
 
       <dt>Description</dt>

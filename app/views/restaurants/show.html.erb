@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h3><%= @restaurant.name %> - <%=Location.find_by(:id => @restaurant.location_id).place   %></h3>
+  <h3><%= @restaurant.name %> - <%=@restaurant.location.place   %></h3>
 </div>
 
 <div class="row">
@@ -8,14 +8,11 @@
       <dt>Name</dt>
       <dd><%= @restaurant.name %></dd>
 
-      <dt>Rating</dt>
-      <dd><%= @restaurant.rating %></dd>
-
       <dt>Restaurant image</dt>
       <dd><img src="<%= @restaurant.restaurant_image %>"></dd>
 
       <dt>Location</dt>
-      <dd> <a href="/locations/<%= @restaurant.location_id %>"> <%= Location.find_by(:id => @restaurant.location_id).place %></dd></a>
+      <dd> <a href="/locations/<%= @restaurant.location_id %>"> <%= @restaurant.location.place %></dd></a>
 
 
     </dl>

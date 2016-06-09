@@ -24,16 +24,15 @@
           Hotel
         </label>
 
-        <input type="text" id="hotel_id" name="hotel_id" placeholder="Hotel" class="form-control" value="<%= @stay.hotel_id %>">
+        <%= select_tag(:hotel_id, options_from_collection_for_select(Hotel.where(:location_id =>@location_id), :id, :name, @stay.hotel_id), :class => "form-control") %>
       </div>
 
-      <!-- Label and input for leg_id -->
-      <div class="form-group">
-        <label for="leg_id" class="control-label">
-          Leg
-        </label>
+        <input type="hidden" id="leg_id" name="leg_id" placeholder="Leg" class="form-control" value="<%= @stay.leg_id %>">
+      </div>
 
-        <input type="text" id="leg_id" name="leg_id" placeholder="Leg" class="form-control" value="<%= @stay.leg_id %>">
+      <div class="form-group">
+        <a href="/hotels/new">Add New Hotel</a>
+
       </div>
 
       <!-- Label and input for rating -->

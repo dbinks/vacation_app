@@ -24,22 +24,24 @@
           Restaurant
         </label>
 
-        <input type="text" id="restaurant_id" name="restaurant_id" placeholder="Restaurant" class="form-control" value="<%= @meal.restaurant_id %>">
+          <%= select_tag(:restaurant_id, options_from_collection_for_select(Restaurant.where(:location_id =>@location_id), :id, :name, @meal.restaurant_id), :class => "form-control") %>
+      </div>
+
+      <div class="form-group">
+        <a href="/restaurants/new">Add New Restaurant</a>
+
       </div>
 
       <!-- Label and input for leg_id -->
-      <div class="form-group">
-        <label for="leg_id" class="control-label">
-          Leg
-        </label>
 
-        <input type="text" id="leg_id" name="leg_id" placeholder="Leg" class="form-control" value="<%= @meal.leg_id %>">
-      </div>
+
+
+        <input type="hidden" id="leg_id" name="leg_id" placeholder="Leg" class="form-control" value="<%= @meal.leg_id %>">
 
       <!-- Label and input for rating -->
       <div class="form-group">
         <label for="rating" class="control-label">
-          Rating
+          Rating (0-5)
         </label>
 
         <input type="text" id="rating" name="rating" placeholder="Rating" class="form-control" value="<%= @meal.rating %>">

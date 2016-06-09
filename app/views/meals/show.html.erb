@@ -5,13 +5,13 @@
   <div class="col-md-12">
     <dl class="dl-horizontal">
       <dt>Restaurant</dt>
-      <dd> <a href="/restaurants/<%=@meal.restaurant_id%>"> <%= Restaurant.find_by(:id =>@meal.restaurant_id).name %></a></dd>
+      <dd> <a href="/restaurants/<%=@meal.restaurant_id%>"> <%= @meal.restaurant.name %></a></dd>
 
 
       <dt>Leg</dt>
       <dd> <a href="/legs/<%= @meal.leg_id %>"> <%= Location.find_by(:id => @location_id).place %></a></dd>
 
-      <dt>Rating</dt>
+      <dt>Rating (0-5)</dt>
       <dd><%= @meal.rating %></dd>
 
       <dt>Description</dt>

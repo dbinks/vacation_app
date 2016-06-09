@@ -10,7 +10,6 @@
     <table class="table table-striped table-hover">
       <tr>
         <th>Name</th>
-        <th>Rating</th>
         <th>Hotel image</th>
         <th>Location</th>
         <th>Actions</th>
@@ -19,7 +18,6 @@
       <% @hotels.each do |hotel| %>
       <tr>
         <td><%= hotel.name %></td>
-        <td><%= hotel.rating %></td>
         <td><img src="<%= hotel.hotel_image %>"></td>
         <td><a href="/locations/<%= hotel.location_id %>"><%= Location.find_by(:id => hotel.location_id).place %></td>
         <td>

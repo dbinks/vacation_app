@@ -1,6 +1,6 @@
 class StaysController < ApplicationController
   def index
-    @stays = Stay.all
+    @stays = current_user.stays
   end
 
   def show
@@ -14,6 +14,7 @@ class StaysController < ApplicationController
 
   def create
     @stay = Stay.new
+    @stay.user_id = params[:user_id]
     @stay.hotel_id = params[:hotel_id]
     @stay.leg_id = params[:leg_id]
     @stay.rating = params[:rating]
@@ -22,12 +23,13 @@ class StaysController < ApplicationController
     if @stay.save
       redirect_to :back, :notice => "Stay created successfully."
     else
-      render 'new'
+      redirect_to :back, :notice => "Entry error"
     end
   end
 
   def edit
     @stay = Stay.find(params[:id])
+    @location_id = Leg.find_by(:id => @stay.leg_id).location_id
   end
 
   def update
